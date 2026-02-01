@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+dist-*/
+build/
+out-tsc/
+.angular/
+.tmp/
+
+# Server-side bundle (Angular Universal / SSR)
+dist/server/
+server/dist/
+main.server.*
+*.server.js
+*.server.js.map
+
+# Coverage
+coverage/
+coverage-*/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*.local
+
+# Package artifacts
+*.tgz
+.cache/
+.pnpm-store/
+
+# Temp files
+tmp/
+temp/
+*.tmp
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml

@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <div class="container mt-4">
+        <h3>Create New Customers</h3>
+        <p>This is the create customer page for Angular SSR application.</p>
+    </div>
+    <div class=".container mt-4"> 
+        <form #customersForm="ngForm" (ngSubmit)="create()" novalidate>
+            <input name="firstName" placeholder="First name" [(ngModel)]="model.firstName" />
+            <br><br>
+            <input name="lastName" placeholder="Last name" [(ngModel)]="model.lastName" />
+            <br><br>
+            <input name="phone" placeholder="Phone" [(ngModel)]="model.phone" />
+            <br><br>
+            <input name="email" placeholder="Email" [(ngModel)]="model.email" />
+            <br><br>
+            <button type="submit">Create Customer</button>
+        </form>
+    </div>
+</div>

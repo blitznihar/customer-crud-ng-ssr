@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <div class="container mt-4">
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the home page of our Angular SSR application.</p>
+    </div>
+    <div>
+             <section class="card">
+        <h2>Customers</h2>
+        <button (click)="load()" [disabled]="loading || saving">Refresh</button>
+
+        <div *ngIf="editingId" class="mb-3">
+          <h3>Edit Customer</h3>
+          <div class="mb-2">
+            <input class="form-control" placeholder="First name" [(ngModel)]="model.firstName" />
+          </div>
+          <div class="mb-2">
+            <input class="form-control" placeholder="Last name" [(ngModel)]="model.lastName" />
+          </div>
+          <div class="mb-2">
+            <input class="form-control" placeholder="Email" [(ngModel)]="model.email" />
+          </div>
+          <div class="mb-2">
+            <input class="form-control" placeholder="Phone" [(ngModel)]="model.phone" />
+          </div>
+          <div>
+            <button class="btn btn-primary" (click)="saveEdit()" [disabled]="saving">Save</button>
+            <button class="btn btn-secondary" (click)="cancelEdit()" [disabled]="saving">Cancel</button>
+          </div>
+          <div *ngIf="error" class="text-danger mt-2">{{ error }}</div>
+        </div>
+
+        <p *ngIf="loading">Loading…</p>
+
+        <table *ngIf="!loading" class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th style="width: 120px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of customers">
+              <td>{{ c.firstName }} {{ c.lastName }}</td>
+              <td>{{ c.email }}</td>
+              <td>{{ c.phone || '-' }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary me-2" (click)="edit(c._id)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="remove(c._id)" [disabled]="deletingId===c._id">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="customers.length === 0">
+              <td colspan="4">No customers yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+</div>
+
+
+
+

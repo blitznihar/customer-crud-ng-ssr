@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-ssr
+  namespace: customer-ssr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-ssr
+  template:
+    metadata:
+      labels:
+        app: web-ssr
+    spec:
+      containers:
+        - name: web-ssr
+          image: web-ssr:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000
+          env:
+            # We will use this later inside SSR to call API internally
+            - name: INTERNAL_API_BASE_URL
+              value: "http://customer-api:3000"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 5
