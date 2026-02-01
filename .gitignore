@@ -21,7 +21,6 @@ out-tsc/
 # Server-side bundle (Angular Universal / SSR)
 dist/server/
 server/dist/
-main.server.*
 *.server.js
 *.server.js.map
 
