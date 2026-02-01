@@ -75,3 +75,31 @@ npm run dev
 
 - The web app is SSR-enabled; client hydration happens automatically after the server render.
 - The API is optional for local development. You can run the UI without it.
+
+## Kubernetes: API is internal-only
+
+When deployed to Kubernetes, the Customer API is not exposed externally. It is only reachable from inside the cluster (and used by the SSR server). This keeps the API private while still allowing the web UI to function normally.
+
+### Verify the API is reachable inside the cluster
+
+From a temporary pod in the same namespace:
+
+```bash
+kubectl -n customer-ssr run tmp --rm -it --image=curlimages/curl --restart=Never -- \
+	curl -s http://customer-api:3000/health
+kubectl -n customer-ssr run tmp --rm -it --image=curlimages/curl --restart=Never -- \
+	curl -s http://customer-api:3000/api/customers
+```
+
+You should see a successful response (e.g., `{"ok":true}` and a JSON list of customers).
+
+### Verify the API is NOT reachable from outside the cluster
+
+From your local machine (outside Kubernetes):
+
+```bash
+curl http://customer-api:3000/api/customers
+curl http://localhost:3000/api/customers
+```
+
+Both should fail, because the API service is only exposed as a ClusterIP inside the Kubernetes network. The SSR web app can still call the API from the server side, so the UI works while the API remains private.
